@@ -1,0 +1,121 @@
+<section class="content">
+    <br>
+    <h3 id="subtitulo"> Gestión de Productos </h3>
+    <div class="card mb-3 text-center">
+      <div class="card-body text-primary">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Precio</th>
+                <th style="text-align: left"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal">
+                  Añadir
+                </button></th>
+              </tr>
+            </thead>
+            <tbody *ngIf="productosCargados">
+              <tr *ngFor="let item of productos | paginate: {itemsPerPage: 10, currentPage: p, totalItems: productos.length}" class="align-middle">
+                <td>{{item.id}}</td>
+                <td>{{item.nombreProducto}}</td>
+                <td>{{item.precio}}</td>
+                <td>
+                  <div class="btn-toolbar">
+                    <button type="button" class="btn btn-warning" id="botones" data-toggle="modal" data-target="#editModal" (click)="editarProducto(item)">
+                      Editar
+                    </button>
+                    <button class="btn btn-danger" type="button" (click)="borrarProducto(item)"
+                      id="botones">Eliminar</button>
+
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Nuevo producto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]='formProducto' (ngSubmit)="agregarProducto()" novalidate>
+          <div class="modal-body">
+                  <div class="form-group row">
+                      <label class="col-4 col-form-label">Nombre</label>
+                      <div class="col-8">
+                          <input class="form-control" formControlName="nombreProducto" type="text">
+                      </div>
+                  </div>
+                  <br>
+
+                  <div class="form-group row">
+                    <label class="col-4 col-form-label">Precio</label>
+                    <div class="col-8">
+                        <input class="form-control" formControlName="precio" type="number">
+                    </div>
+                </div>
+          </div>
+          <br>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" type="submit" class="btn btn-success" data-dismiss="modal" (click)="agregarProducto()">Agregar producto</button>
+          </div>
+      </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Editar producto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]='formProducto' (ngSubmit)="editarProducto()" novalidate>
+          <div class="modal-body">
+                  <div class="form-group row">
+                      <label class="col-4 col-form-label">Nombre</label>
+                      <div class="col-8">
+                          <input class="form-control" formControlName="nombreProducto" type="text">
+                      </div>
+                  </div>
+                  <br>
+
+                  <div class="form-group row">
+                    <label class="col-4 col-form-label">Precio</label>
+                    <div class="col-8">
+                        <input class="form-control" formControlName="precio" type="number">
+                    </div>
+                </div>
+          </div>
+          <br>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" type="submit" class="btn btn-success" data-dismiss="modal" (click)="guardarEditarProducto()">Guardar cambios</button>
+          </div>
+      </form>
+      </div>
+      
+    </div>
+  </div>
+</div>

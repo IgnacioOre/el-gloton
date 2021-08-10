@@ -1,0 +1,54 @@
+<div class="omb_login">
+    <h3 class="omb_authTitle" style="color: black;">Registrarse</h3>
+    <div class="row omb_row-sm-offset-3">
+        <div class="col-xs-12 col-sm-6">
+            <form class="omb_loginForm text-center" [formGroup]="formUsuario" (ngSubmit)="registrarse()" autocomplete="off"
+                method="POST">
+                <div class="form-group">
+                    <span class="input-group-addon"><i class="fa fa-user">&nbsp;</i></span>
+                    <label for="exampleInputEmail1">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" aria-describedby="nombre"
+                        formControlName="name">
+                </div>
+                <br>
+                <div class="form-group">
+                    <span class="input-group-addon"><i class="fa fa-envelope"
+                            aria-hidden="true">&nbsp;</i></span>
+                    <label for="exampleInputEmail1">Email</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="email"
+                        formControlName="email">
+                </div>
+                <br>
+                <div class="form-group">
+                    <span class="input-group-addon"><i class="fa fa-lock">&nbsp;</i></span>
+                    <label for="exampleInputPassword1">Contraseña</label>
+                    <input type="password" class="form-control" id="contraseña"
+                        formControlName="password">
+                </div>
+                <br>
+
+                <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Crear usuario
+                  </button>
+                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Usuario creado</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          El usuario ha sido creado, puede iniciar sesión con los datos que ingresó.
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-primary" data-dismiss="modal" [routerLink]="['/login']">Iniciar sesión</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                
+            </form>
+        </div>
+    </div>

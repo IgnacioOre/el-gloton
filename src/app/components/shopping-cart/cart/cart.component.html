@@ -1,0 +1,14 @@
+<div *ngIf="cartItems.length === 0" class="alert alert-info">El carrito esta vacío.</div>
+
+<ul *ngIf="cartItems.length > 0" class="list-group">
+  <li class="list-group-item" *ngFor="let item of cartItems">
+    <app-cart-item [cartItem]="item"></app-cart-item>
+  </li>
+
+  <li class="list-group-item active" *ngIf="cartTotal>0">
+    <strong>Total</strong> {{ cartTotal | currency:'CLP' }}
+  </li>
+  <li class="list-group-item active justify-content-center" *ngIf="cartTotal>0">
+    <button type="button" class="btn btn-success text-center" [routerLink]="['/crear-pedido']">Comprar</button>
+  </li>
+</ul>

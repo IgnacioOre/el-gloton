@@ -1,0 +1,107 @@
+<form [formGroup]='formPedido' (ngSubmit)="generarPedido()" novalidate>
+    <!--Modal Header-->
+    <div class="modal-header">
+        <h3 class="modal-title">Pedido</h3>
+    </div>
+
+    <!--Modal Body-->
+    <div class="modal-body">
+        <!--Card de Cliente-->
+        <div class="card" id="tarjeta">
+            <h5>Productos del pedido:</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Item</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of items; let i = index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{item.nombreProducto}}</td>
+                        <td>{{item.cantidad}}</td>
+                        <td>{{item.precio}}</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <th scope="row"></th>
+                        <td></td>
+                        <td><b>Total:</b></td>
+                        <td>{{calcCartTotal()}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!--Nombre-->
+            
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label" type="dropdown">Tipo de pago</label>
+                <div class="col-8">
+                    <select class="form-control" formControlName="tipoPago">
+                        <option value="Efectivo" selected="selected">Efectivo</option>
+                        <option value="Tarjeta">Tarjeta débito/crédito</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label" type="dropdown">Forma de entrega</label>
+                <div class="col-8">
+                    <select class="form-control" #tipoEntrega formControlName="tipoEntrega">
+                        <option value="Retiro">Retiro en local</option>
+                        <option value="Reparto">A domicilio</option>
+                    </select>
+                </div>
+                <!--Si se selecciona ABONO se solicita ingresar la cantidad-->
+                <!--Indicaciones-->
+            </div>
+            <div class="form-group row" *ngIf="tipoEntrega.value === 'Reparto'">
+                <label class="col-4 col-form-label">Dirección</label>
+                <div class="col-8">
+                    <input class="form-control" formControlName="direccion" type="text">
+                </div>
+            </div>
+            
+        </div>
+        <br>
+
+    </div>
+    <br>
+    <!--Modal footer-->
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="generarPedido()">
+            Confirmar pedido
+          </button>
+        <button class="btn btn-danger" [routerLink]="['/shop']">Cancelar</button>
+    </div>
+</form>
+
+<!-- Button trigger modal -->
+
+  
+<!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Pedido creado con éxito!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" [routerLink]="['/shop']">Volver al inicio</button>
+        </div>
+      </div>
+    </div>
+  </div>
